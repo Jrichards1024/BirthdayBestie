@@ -6,6 +6,8 @@ import CreateAccountScreen from './app/screens/CreateAccountScreen';
 import LandingScreen from './app/screens/LandingScreen';
 import ProfileScreen from './app/screens/ProfileScreen';
 import NewBestieScreen from './app/screens/NewBestieScreen';
+import MotivationScreen from './app/screens/MotivationScreen';
+import EditProfileScreen from './app/screens/EditProfileScreen';
 import { useState } from 'react';
 import WelcomeScreen from './app/screens/WelcomeScreen';
 import LoginScreen from './app/screens/LoginScreen';
@@ -51,6 +53,8 @@ export default function App() {
           <Stack.Screen name="LandingScreen" component={LandingScreen} />
           <Stack.Screen name="ProfileScreen" component={ProfileScreen} />
           <Stack.Screen name="NewBestieScreen" component={NewBestieScreen} />
+          <Stack.Screen name="MotivationScreen" component={MotivationScreen} />
+          <Stack.Screen name="EditProfileScreen" component={EditProfileScreen} />
           </Stack.Navigator>
         </NavigationContainer>
     )

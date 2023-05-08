@@ -3,10 +3,8 @@ import { ImageBackground,StyleSheet,View, Image, Button, Text, TextInput, Scroll
 import DateTimePicker from '@react-native-community/datetimepicker';
 import * as ImagePicker from 'expo-image-picker';
 import * as SQLite from 'expo-sqlite';
-import { useRoute } from '@react-navigation/native';
+import { useRoute} from '@react-navigation/native';
 const db = SQLite.openDatabase('MainDB')
-
-
 
 function NewBestieScreen({navigation}) {
     // const route = useRoute();
@@ -15,7 +13,6 @@ function NewBestieScreen({navigation}) {
     var [image, setImage] = useState(null);
     var [profilePic, setProfilePic] = useState(false);
     var [Name, setName] = useState('');
-    var [names, setNames] = useState([]); //for testing
     var [Message, setMessage] = useState('');
     var [giftIdea, setGift] = useState('');
     var [Notes, setNotes] = useState('');
@@ -44,13 +41,11 @@ function NewBestieScreen({navigation}) {
       
     const createTable=async()=>{
         try{
-            await db.transaction(async (tx)=>{
-                await tx.executeSql(
+            db.transaction((tx)=>{
+                tx.executeSql(
                     "CREATE TABLE IF NOT EXISTS "
-                    + "Besties "
-                    + "(ID INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, Message TEXT,Pic TEXT, Birthday TEXT, giftIdea TEXT, Celebration_Date TEXT, Notes TEXT);",
-                    null,
-                    console.log('lo pasó')
+                    + "Besties1 "
+                    + "(ID INTEGER PRIMARY KEY AUTOINCREMENT, Name TEXT, Message TEXT,Pic TEXT, Birthday TEXT, giftIdea TEXT, Notes TEXT);"
                 )
             })
         }
@@ -71,34 +66,19 @@ function NewBestieScreen({navigation}) {
 
         await db.transaction(async (tx)=>{
             await tx.executeSql(
-                `INSERT INTO Besties (Name, Message, Pic, Birthday, giftIdea, Notes) VALUES ('${Name}','${Message}','${image}','${stringBirthday}','${giftIdea}','${Notes}')`,
+                `INSERT INTO Besties1 (Name, Message, Pic, Birthday, giftIdea, Notes) VALUES ('${Name}','${Message}','${image}','${stringBirthday}','${giftIdea}','${Notes}')`,
                 null,
                 () => console.log('Insert successful')
                 // [Username, Password, image, stringBirthday]
             )
         })
         console.log("in new bestie screen")
-        await selectFriends();
         navigation.navigate('LandingScreen');
     }
     catch(error){
         console.log(error)
     }
     }
-    const selectFriends= async()=>{
-        await db.transaction(async(tx)=>{
-            await tx.executeSql('SELECT * FROM Besties ', null,
-            (txObject, resultSet) => {
-                setNames(resultSet)
-                console.log(names)
-            }
-            
-            )
-        })
-        console.log("select friends---------")
-        console.log(names)
-    }
-
     
     const pickImage = async () => {
         // No permissions request is necessary for launching the image library
@@ -126,7 +106,6 @@ function NewBestieScreen({navigation}) {
         height: 200,
         borderRadius: 100,
         resizeMode: 'contain',}} source = {require('../assets/addPicture.png')}/>}
-            {/* <Image style = {styles.button} source = {require('../assets/addPicture.png')}/> */} 
           </View>
         </TouchableHighlight>
             <ScrollView style = {styles.TextBox} contentContainerStyle= {styles.contentContainerStyle}>

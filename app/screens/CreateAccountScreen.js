@@ -12,17 +12,12 @@ function CreateAccountScreen({navigation}) {
   function test(){
     console.log('hi')};
   const [value, onChangeText] = useState('Useless Multiline Placeholder');
-  // const [date, setDate] = useState ('');
   const [Username, setUsername] = useState('Username');
   const [Password, setPassword] = useState('');
-  // const [Pic, setPic] = useState('');
   const [profilePic, setProfilePic] = useState(false);
   const [Birthday, setBirthday] = useState(new Date(1598051730000));
   const [stringBirthday,setString] = useState('');
   var monthTransl = {'1': 'Jan.', '2': 'Feb.', '3': 'March', '4': 'April', '5':'May', '6': 'June', '7': 'July', '8':'Aug.', '9':'Sept.', '10': 'Oct.', '11':'Nov.', '12':'Dec.'}
-  //   const onChange = (event, selectedDate) =>{
-  //   const currentDate = selectedDate || Date;
-  // }
   const [image, setImage] = useState(null);
 
   const pickImage = async () => {
@@ -76,7 +71,6 @@ function CreateAccountScreen({navigation}) {
         await db.transaction(async (tx)=>{
             await tx.executeSql(
                 `INSERT INTO Users (Username, Password, Pic, Birthday) VALUES ('${Username}','${Password}','${image}','${stringBirthday}')`
-                // [Username, Password, image, stringBirthday]
             )
         })
       navigation.navigate('LandingScreen');

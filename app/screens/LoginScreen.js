@@ -25,7 +25,6 @@ function LoginScreen({navigation}) {
     const setData = async()=>{
         console.log("print")
         try{
-            console.log("hey")
             console.log(Username)
             await db.transaction(async (tx)=>{
                 await tx.executeSql(
@@ -48,7 +47,7 @@ function LoginScreen({navigation}) {
             </View>
             <View  style = {styles.field}>
             <Text style = {styles.text}>Password: </Text>
-            <TextInput placeholder = "Password" style = {{color:'white'}} onChangeText={text=> setPassword('*')}/>
+            <TextInput secureTextEntry={true} placeholder = "Password" style = {{color:'white'}} onChangeText={text=> setPassword(text)}/>
             </View>
         </View>
         <View style = {styles.CreateAccountButton}>

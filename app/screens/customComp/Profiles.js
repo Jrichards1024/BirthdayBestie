@@ -7,7 +7,7 @@ function Profiles(props) {
     <SafeAreaView>
         <View style = {styles.profile}>
             <Text style = {{color:"white"}}>{props.name}</Text>
-            <Image style={styles.image} source = {require('../../assets/randonman.png')}/>
+            <Image style={styles.image} source = {{uri:props.image}}/>
             <Text style = {{color:"white"}}>{props.bday}</Text>
         </View>
      </SafeAreaView>
@@ -18,7 +18,8 @@ function Profiles(props) {
 
 Profiles.propTypes = {
     name: PropTypes.string,
-    bday: PropTypes.string
+    bday: PropTypes.string,
+    image:PropTypes.string
 }
 let styles = StyleSheet.create({
     profile:{

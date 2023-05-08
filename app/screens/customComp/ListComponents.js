@@ -7,7 +7,7 @@ function ListCompenents(props) {
     <View>
         <View style = {styles.profile}>
             <View>
-                <Image style={styles.image} source = {require('../../assets/randonman.png')}/>
+                <Image style={styles.image} source = {{uri:props.image}}/>
             </View>
             <View>
                 <Text style ={{color:"white", fontWeight: "bold"}}>{props.name}</Text>
@@ -22,6 +22,7 @@ function ListCompenents(props) {
 
 ListCompenents.propTypes = {
     name: PropTypes.string,
+    image: PropTypes.image,
     bday: PropTypes.string
 }
 const styles = StyleSheet.create({
